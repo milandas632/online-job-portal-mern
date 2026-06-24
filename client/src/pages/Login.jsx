@@ -29,7 +29,6 @@ export default function Login() {
         <label>Password<div className="input-icon"><LockKeyhole size={18} /><input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Minimum 8 characters" /></div></label>
         <button className="button full" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
       </form>
-      <div className="demo-box"><strong>Demo accounts</strong><small>Candidate: candidate@jobportal.test / Candidate@123</small><small>Recruiter: recruiter@jobportal.test / Recruiter@123</small><small>Admin: admin@jobportal.test / Admin@123</small></div>
       <p className="auth-switch">New user? <Link to="/register">Create an account</Link></p>
     </div></section>
   );
