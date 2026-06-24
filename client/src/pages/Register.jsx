@@ -13,7 +13,17 @@ export default function Register() {
   const submit = async (event) => {
     event.preventDefault(); setBusy(true);
     try {
-      await register(form);
+      const payload =
+  form.role === 'candidate'
+    ? {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        role: form.role
+      }
+    : form;
+
+await register(payload);
       toast.success('Account created');
       navigate(`/${form.role}`);
     } catch (error) { toast.error(error.response?.data?.message || 'Registration failed'); }
