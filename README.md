@@ -1,11 +1,14 @@
 # Online Job Portal System Using Full Stack Development Frameworks
 
-A complete MERN-stack BCA major project that connects job seekers with recruiters through a secure online platform. The application includes candidate, recruiter, and administrator roles, job search and filtering, resume management, online applications, saved jobs, dashboards, and role-based access control.
+A complete MERN-stack BCA major project that connects job seekers with recruiters through a secure online platform. The application includes candidate, recruiter, and administrator roles, job search and filtering, resume management, online applications, saved jobs, dashboards, role-based access control, and realistic demo data for academic presentation.
 
 ## Live Project
 
 **Live Website:**
 https://online-job-portal-mern.onrender.com
+
+**GitHub Repository:**
+https://github.com/milandas632/online-job-portal-mern
 
 ## Student Details
 
@@ -16,12 +19,33 @@ https://online-job-portal-mern.onrender.com
 **Academic Session:** 2023–2026
 **Guide/Mentor:** Dr. Vandana Sivaraj
 
+## Project Overview
+
+CareerBridge is an online job portal developed using the MERN stack. It allows job seekers to create profiles, upload resumes, search for jobs, save vacancies, and submit applications. Recruiters can create company profiles, publish vacancies, manage jobs, review applicants, and update application statuses. Administrators can manage users, job listings, and job categories.
+
+The live website also contains realistic demonstration data so that the platform looks complete during academic evaluation.
+
+## Demo Data Included
+
+The deployed application currently includes:
+
+* 10 demo job-seeker accounts
+* 10 demo recruiter accounts
+* 10 demo company profiles
+* 20 demo job vacancies
+* 20 demo applications
+* Multiple application statuses such as applied, reviewing, shortlisted, rejected, and hired
+* Default categories for software development, data and analytics, design, marketing, finance, and human resources
+
+The demo-account passwords are generated randomly and are not displayed publicly. The demo data is intended only to make the academic project appear realistic and complete.
+
 ## Features
 
 ### Job Seeker
 
 * Register and sign in securely
 * Create and update a professional candidate profile
+* Add headline, location, phone number, skills, and professional summary
 * Upload a PDF resume
 * Search jobs by keyword, location, category, and employment type
 * View complete job details
@@ -29,13 +53,15 @@ https://online-job-portal-mern.onrender.com
 * Apply for jobs with an optional cover letter
 * Track submitted applications
 * Withdraw applications
-* View application status updates
+* View application-status updates
 
 ### Recruiter
 
 * Register as a recruiter
 * Create and update a company profile
+* Add company name, website, location, and description
 * Post new job vacancies
+* Add job title, category, salary, employment type, skills, and deadline
 * Edit, close, and delete vacancies
 * View published jobs
 * Review candidates who applied for each job
@@ -61,7 +87,7 @@ https://online-job-portal-mern.onrender.com
 * Vite 8
 * React Router
 * Axios
-* Modern responsive CSS
+* Responsive CSS
 
 ### Backend
 
@@ -85,36 +111,37 @@ https://online-job-portal-mern.onrender.com
 ### Deployment
 
 * GitHub for source-code hosting
-* MongoDB Atlas for the cloud database
-* Render for full-stack application deployment
+* MongoDB Atlas for cloud database hosting
+* Render for full-stack deployment
 
 ## Project Structure
 
 ```text
 .
-├── client/                    React frontend
-├── server/                    Express API and MongoDB models
-├── docs/                      API and database documentation
-├── .github/workflows/ci.yml   GitHub Actions build check
-├── render.yaml                Render deployment configuration
-├── package.json               Root scripts
-├── DEPLOYMENT.md              Deployment documentation
-└── README.md                  Project documentation
+├── client/                         React frontend
+├── server/                         Express API and MongoDB models
+│   └── src/
+│       ├── populateDemoData.js     Safe demo-data population script
+│       └── server.js               Server startup and optional demo population
+├── docs/                           API and database documentation
+├── .github/workflows/ci.yml        GitHub Actions build check
+├── render.yaml                     Render deployment configuration
+├── package.json                    Root scripts
+├── DEPLOYMENT.md                   Deployment documentation
+└── README.md                       Project documentation
 ```
 
 ## Run the Project Locally
 
 ### 1. Prerequisites
 
-Install the following software:
+Install the following:
 
 * Node.js 22 or newer
 * npm
 * MongoDB Community Server or a MongoDB Atlas account
 
-### 2. Download the Project
-
-Clone the GitHub repository:
+### 2. Clone the Repository
 
 ```bash
 git clone https://github.com/milandas632/online-job-portal-mern.git
@@ -128,13 +155,13 @@ cd online-job-portal-mern
 
 ### 3. Install Dependencies
 
-Install the root dependencies:
+Install root dependencies:
 
 ```bash
 npm install
 ```
 
-Install the frontend and backend dependencies:
+Install frontend and backend dependencies:
 
 ```bash
 npm run install:all
@@ -148,13 +175,13 @@ Copy the example environment file:
 cp server/.env.example server/.env
 ```
 
-On Windows PowerShell, use:
+On Windows PowerShell:
 
 ```powershell
 Copy-Item server/.env.example server/.env
 ```
 
-Open `server/.env` and configure the following values:
+Open `server/.env` and configure:
 
 ```env
 MONGODB_URI=your_mongodb_atlas_connection_string
@@ -162,13 +189,12 @@ JWT_ACCESS_SECRET=your_secure_access_secret
 JWT_REFRESH_SECRET=your_secure_refresh_secret
 NODE_ENV=development
 PORT=5000
+POPULATE_DEMO_DATA=false
 ```
 
 Do not upload the real `.env` file to GitHub.
 
 ### 5. Start the Development Servers
-
-Run:
 
 ```bash
 npm run dev
@@ -179,19 +205,43 @@ The application will normally be available at:
 * Frontend: `http://localhost:5173`
 * Backend API: `http://localhost:5000/api`
 
-## Optional Sample Data
+## Demo Data Population
 
-The repository contains a seed command that can create sample data for local development and testing:
+The project includes a safe demo-data population system in:
+
+```text
+server/src/populateDemoData.js
+```
+
+The demo data can be added by setting:
+
+```env
+POPULATE_DEMO_DATA=true
+```
+
+When the server starts with this value, it checks for and creates the demo candidates, recruiters, company profiles, jobs, categories, and applications.
+
+After the population finishes successfully, change the value back to:
+
+```env
+POPULATE_DEMO_DATA=false
+```
+
+This avoids unnecessary database checks during future restarts.
+
+The population script is designed to avoid deleting or duplicating existing production data.
+
+## Important Seed Warning
+
+The project may also contain a traditional seed command:
 
 ```bash
 npm run seed
 ```
 
-The seed command should only be used on a local or disposable test database.
+Do not run this command on the existing live production database because it may reset or replace existing jobs, applications, saved jobs, sessions, and sample records.
 
-**Do not run the seed command on the existing live production database**, because it may reset or replace existing jobs, applications, saved jobs, sessions, and other project data.
-
-Demo account credentials are intentionally not displayed publicly in this README or on the sign-in page.
+Use the safer `POPULATE_DEMO_DATA` method for adding demonstration content without deleting existing data.
 
 ## MongoDB Atlas Configuration
 
@@ -204,9 +254,9 @@ To connect the application to MongoDB Atlas:
 5. For Render deployment, allow access using `0.0.0.0/0`.
 6. Copy the Node.js connection string.
 7. Replace the password placeholder with the database-user password.
-8. Store the complete connection string as the `MONGODB_URI` environment variable in Render.
+8. Store the complete connection string as `MONGODB_URI` in Render.
 
-Default job categories are created automatically when the server starts if they are not already available.
+Default job categories are created automatically when required.
 
 ## Deploy on Render
 
@@ -224,8 +274,6 @@ In Render:
 
 ### 2. Service Configuration
 
-Use the following configuration:
-
 **Runtime:**
 
 ```text
@@ -234,7 +282,7 @@ Node
 
 **Root directory:**
 
-Leave this field blank.
+Leave blank.
 
 **Build command:**
 
@@ -250,7 +298,7 @@ npm run start
 
 ### 3. Render Environment Variables
 
-Add the following environment variables:
+Add:
 
 ```text
 MONGODB_URI
@@ -258,6 +306,7 @@ JWT_ACCESS_SECRET
 JWT_REFRESH_SECRET
 NODE_ENV
 NODE_VERSION
+POPULATE_DEMO_DATA
 ```
 
 Recommended values:
@@ -265,34 +314,35 @@ Recommended values:
 ```text
 NODE_ENV=production
 NODE_VERSION=22.22.3
+POPULATE_DEMO_DATA=false
 ```
 
-Generate strong and different values for:
+Use strong and different secret values for:
 
 ```text
 JWT_ACCESS_SECRET
 JWT_REFRESH_SECRET
 ```
 
-Do not place database passwords, JWT secrets, or private environment-variable values inside the GitHub repository.
+Do not place database passwords, JWT secrets, or private environment values inside the GitHub repository.
 
 ### 4. Deploy
 
 Click **Deploy Web Service**.
 
-After the build and deployment are completed, the service will be available at:
+After deployment, the application is available at:
 
 ```text
 https://online-job-portal-mern.onrender.com
 ```
 
-The free Render instance may enter sleep mode after inactivity. The first request after inactivity can therefore take approximately 30–60 seconds to load.
+The free Render instance may enter sleep mode after inactivity. The first request after inactivity can therefore take around 30–60 seconds.
 
 More deployment information is available in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Tested Workflow
 
-The following workflow has been tested on the live application:
+The following workflow has been tested successfully on the live application:
 
 1. Candidate registration and sign-in
 2. Candidate-profile creation
@@ -300,30 +350,34 @@ The following workflow has been tested on the live application:
 4. Recruiter registration and sign-in
 5. Company-profile creation
 6. Job-vacancy publication
-7. Job search and job-details display
-8. Candidate job application
-9. Cover-letter submission
-10. Recruiter applicant review
-11. Application-status management
-12. MongoDB Atlas database connectivity
-13. Render production deployment
+7. Job-category loading
+8. Job search and filtering
+9. Job-details display
+10. Candidate job application
+11. Cover-letter submission
+12. Recruiter applicant review
+13. Application-status management
+14. Demo-data population
+15. MongoDB Atlas database connectivity
+16. Render production deployment
 
 ## Security Notes
 
 * Never commit the real `.env` file.
-* The `.gitignore` file excludes environment files.
-* Keep MongoDB credentials and JWT secrets inside Render environment variables.
-* Do not display test-account passwords publicly.
+* Keep MongoDB credentials and JWT secrets in Render environment variables.
+* Do not display demo-account passwords publicly.
 * Use strong and unique JWT secrets.
-* Use a MongoDB database user with only the permissions required by the application.
-* Avoid running database-reset or seed commands against the live production database.
-* Change any exposed password or secret before using the project for real users.
+* Avoid running reset or seed commands against the live database.
+* Change any exposed password or secret before using the application for real users.
+* Demo records are intended only for academic demonstration.
 
 ## Academic Note
 
 This repository contains the source code for the BCA major project titled **Online Job Portal System Using Full Stack Development Frameworks**.
 
-The system was developed and deployed for academic demonstration and evaluation. Screenshots, workflows, and measured test results included in the final project report should be captured from the running application rather than invented.
+The system was developed and deployed for academic demonstration and evaluation. The live website contains realistic sample jobs, recruiters, candidates, and applications to demonstrate the complete workflow.
+
+Screenshots, workflows, and measured test results included in the final project report should be captured from the running application rather than invented.
 
 ## Author
 
@@ -332,3 +386,4 @@ Bachelor of Computer Applications
 Chandigarh University
 University ID: 023BCA110231
 Academic Session: 2023–2026
+::: 
